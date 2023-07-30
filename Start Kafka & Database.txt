@@ -1,0 +1,45 @@
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+.\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic TestTopic
+
+.\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic TestTopic --from-beginning
+
+CREATE KEYSPACE IF NOT EXISTS rrs_hotel WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : '1' };
+
+INSERT INTO rrs_hotel.user_reviews (r_id, user_name, location_hotel, hotel_name, rating, comment) 
+VALUES (1, 'Nguyen T. T.', 'Đà Nẵng', 'Hotel ABC', 8.5, 'Mọi thứ đều ổn');
+
+TRUNCATE rrs_hotel.user_reviews;
+
+SELECT COUNT(*) FROM rrs_hotel.user_reviews;
+SELECT * FROM rrs_hotel.user_reviews;
+
+DESC KEYSPACES
+
+CREATE TABLE IF NOT EXISTS rrs_hotel.user_reviews (
+r_id int Primary key,
+user_name text ,
+location_hotel text,
+hotel_name text, 
+rating float,
+comment text
+);
+
+
+
+
+
+
+20521609 Nguyễn Hoàng Minh
+20521998 Nguyễn Thiện Thuật
+20521614 Tạ Nhật Minh
+
+
+
+
+
+
